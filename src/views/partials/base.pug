@@ -1,0 +1,15 @@
+doctype html 
+html 
+    head 
+        title #{pageTitle} | Wetube
+        link(rel="stylesheet", href="https://unpkg.com/mvp.css@1.12/mvp.css")
+    body
+        header
+            nav
+                ul
+                    li 
+                        a(href="videos/upload") UPLOAD 
+            block title
+        main
+            block content
+            include footer.pug

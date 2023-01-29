@@ -7,9 +7,7 @@ export const remove = (req, res) => {
 export const see = (req, res) => {
     return res.send("<h1>HERE IS seeUserPAGE</h1>")
 };
-export const treding = (req, res) => {
-    return res.send("<h1>HERE IS HOMEPAGE</h1>")
-};
+
 export const login = (req, res) => {
     return res.send("<h1>HERE IS LOGINPAGE</h1>")
 };

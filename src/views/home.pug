@@ -1,0 +1,11 @@
+extends partials/base.pug
+include mixins/video
+
+block title
+    h1 Here is Treding Page
+    button send
+block content
+    each video in videos
+        +video(video)
+    else
+        li Nothing found.

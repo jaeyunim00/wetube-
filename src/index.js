@@ -1,4 +1,7 @@
-import express from "express";
+import "./db"
+import "./models/Video"
+
+import express, { application } from "express";
 import morgan from "morgan";
 import globalRouter from "./router/globalRouter";
 import userRouter from "./router/userRouter";
@@ -13,8 +16,13 @@ const handleListening = () => {
     console.log(`server open http://localhost:${PORT} ⭐`);
 }
 
+//app.set
+app.set("views", process.cwd() + "/src/views");
+app.set("view engine", "pug");
+
 //app.use
 app.use(morgan("dev"));
+app.use(express.urlencoded({ extended: true }));
 app.use("/", globalRouter);
 app.use("/user", userRouter);
 app.use("/videos", videosRouter);

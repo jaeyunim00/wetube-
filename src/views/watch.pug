@@ -1,0 +1,10 @@
+extends partials/base.pug
+
+block title 
+    h1=video.title
+block content
+    p views: #{video.views}
+    p comments: #{video.comments}
+    p rating: #{video.rating}
+    form(action=`${video.id}/edit`, method="get") 
+        button="edit"
