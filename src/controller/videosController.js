@@ -17,7 +17,7 @@ export const see = async (req, res) => {
   if (video) {
     return res.render("watch", { pageTitle: "watch video", video });
   }
-  return res.render("404", { pageTitle: "Video not Found" });
+  return res.status(404).render("404", { pageTitle: "Video not Found" });
 };
 
 //edit video
@@ -55,7 +55,7 @@ export const postUpload = async (req, res) => {
     return res.redirect("/");
   } catch (error) {
     console.log(error);
-    return res.render("upload", { errorMessage: error._message });
+    return res.status(404).render("upload", { errorMessage: error._message });
   }
 };
 
