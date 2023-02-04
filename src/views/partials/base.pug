@@ -13,8 +13,16 @@ html
                         a(href="videos/upload") UPLOAD 
                     li 
                         a(href="/search") SEARCH 
-                    li 
-                        a(href="/join") JOIN
+                    if !loggedIn
+                        li 
+                            a(href="/login") LOGIN
+                        li 
+                            a(href="/join") JOIN
+                    else
+                        li
+                            a(href="/logout") LOGOUT
+                        li 
+                            a(href="/my-profile") #{loggedInUser.name}의 Profile
             block title
         main
             block content
