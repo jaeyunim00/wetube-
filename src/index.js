@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 import "./db";
 import "./models/Video";
 import "./models/User";
@@ -10,6 +12,7 @@ import morgan from "morgan";
 import rootRouter from "./router/rootRouter";
 import userRouter from "./router/userRouter";
 import videosRouter from "./router/videosRouter";
+import MongoStore from "connect-mongo";
 
 //use PORT
 const PORT = 4000;
@@ -30,9 +33,12 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
   session({
-    secret: "hello",
-    resave: true,
-    saveUninitialized: true,
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.DB_URL,
+    }),
   })
 );
 
