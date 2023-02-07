@@ -42,12 +42,12 @@ app.use(
   })
 );
 
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
   req.sessionStore.all((error, sessions) => {
     console.log(session);
     next();
   });
-});
+});*/
 
 app.use(localMiddleware);
 
