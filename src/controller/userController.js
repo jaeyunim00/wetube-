@@ -81,6 +81,7 @@ export const postJoin = async (req, res) => {
   }
 };
 
+//GITHUB LOGIN API
 export const startGithubLogin = (req, res) => {
   const baseUrl = `https://github.com/login/oauth/authorize`;
   const config = {
@@ -157,4 +158,21 @@ export const finishGithubLogin = async (req, res) => {
   } else {
     return res.redirect("/login");
   }
+};
+
+//KAKAO LOGIN APT
+export const startKakaoLogin = (req, res) => {
+  const baseUrl = `https://kauth.kakao.com`;
+  const config = {
+    rest_api: process.env.KAKAO_REST,
+    redirect_uri: `http://localhost:4000/kakao/finish`,
+  };
+  const backUrl = `/oauth/authorize?client_id=${config.rest_api}&redirect_uri=http://localhost:4000/kakao/finish&response_type=code`;
+  const finalUrl = `${baseUrl}${config}`;
+  console.log(finalUrl);
+  return res.redirect(finalUrl);
+};
+
+export const finishKakaoLogin = (req, res) => {
+  console.log("hello kakao");
 };
