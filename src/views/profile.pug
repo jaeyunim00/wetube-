@@ -1,2 +1,9 @@
 extends partials/base.pug
 
+block content
+  form(action="", method="post")
+    input(placeholder = "name", type = "text", required, name = "name", value=loggedInUser.name)
+    input(placeholder = "email", type = "email", required, name = "email", value=loggedInUser.email)
+    input(placeholder = "username", type = "text", required, name = "username", value=loggedInUser.username)
+    input(placeholder = "location", type = "text", required, name = "location", value=loggedInUser.location)
+    input(type="submit", value="update profile")

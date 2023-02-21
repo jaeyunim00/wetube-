@@ -3,11 +3,14 @@ import bcrypt from "bcrypt";
 import { json } from "express";
 
 export const getProfie = (req, res) => {
-  return res.render("profile", { pageTitle: "profile", User });
+  return res.render("profile", {
+    pageTitle: "profile",
+    User: req.session.User,
+  });
 };
 
 export const postProfile = (req, res) => {
-  return res.send("post Profile");
+  return res.render("edit-profile");
 };
 
 export const remove = (req, res) => {
