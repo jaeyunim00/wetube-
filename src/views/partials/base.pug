@@ -10,8 +10,6 @@ html
                     li
                         a(href="/") HOME
                     li 
-                        a(href="videos/upload") UPLOAD 
-                    li 
                         a(href="/search") SEARCH 
                     if !loggedIn
                         li 
@@ -19,6 +17,8 @@ html
                         li 
                             a(href="/join") JOIN
                     else
+                        li 
+                            a(href="videos/upload") UPLOAD 
                         li
                             a(href="user/logout") LOGOUT
                         li 

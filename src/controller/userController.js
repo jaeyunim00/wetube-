@@ -9,8 +9,21 @@ export const getProfie = (req, res) => {
   });
 };
 
-export const postProfile = (req, res) => {
-  return res.render("edit-profile");
+export const postProfile = async (req, res) => {
+  const { name, email, username, location } = req.body;
+  const _id = req.session.user._id;
+  const updateUser = await User.findByIdAndUpdate(
+    _id,
+    {
+      name,
+      email,
+      username,
+      location,
+    },
+    { new: true }
+  );
+  req.session.user = updateUser;
+  return res.render("profile");
 };
 
 export const remove = (req, res) => {
