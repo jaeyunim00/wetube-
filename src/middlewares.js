@@ -1,3 +1,4 @@
+//로그인 되어있는지 아닌지 확인.
 export const localMiddleware = (req, res, next) => {
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   res.locals.siteName = "WeTube";
