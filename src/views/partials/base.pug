@@ -18,11 +18,11 @@ html
                             a(href="/join") JOIN
                     else
                         li 
+                            a(href="/user/edit") Edit Profile
+                        li 
                             a(href="videos/upload") UPLOAD 
                         li
                             a(href="user/logout") LOGOUT
-                        li 
-                            a(href="user/profile") #{loggedInUser.name}의 Profile
             block title
         main
             block content

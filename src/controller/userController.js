@@ -29,9 +29,6 @@ export const postProfile = async (req, res) => {
 export const remove = (req, res) => {
   return res.send("<h1>HERE IS removeUserPAGE</h1>");
 };
-export const see = (req, res) => {
-  return res.send("<h1>HERE IS seeUserPAGE</h1>");
-};
 
 //login lougout
 export const getLogin = (req, res) => {
@@ -247,4 +244,12 @@ export const finishKakaoLogin = async (req, res) => {
       return res.redirect("/login");
     }
   }
+};
+
+export const getEdit = (req, res) => {
+  return res.send("hello");
+  //return res.render("edit-profile", { pageTitle: "Edit Profile" });
+};
+export const postEdit = (req, res) => {
+  return res.render("edit-profile");
 };
