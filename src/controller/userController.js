@@ -79,7 +79,7 @@ export const remove = (req, res) => {
   return res.send("<h1>HERE IS removeUserPAGE</h1>");
 };
 
-//#######login lougout########
+//#######login########
 export const getLogin = (req, res) => {
   return res.render("login");
 };
@@ -102,6 +102,8 @@ export const postLogin = async (req, res) => {
   req.session.user = user;
   return res.redirect("/");
 };
+
+//#####logout#######
 export const logout = (req, res) => {
   req.session.destroy();
   return res.redirect("/");
