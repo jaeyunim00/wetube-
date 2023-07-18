@@ -1,6 +1,6 @@
 import User from "../models/User";
 import bcrypt from "bcrypt";
-import { json } from "express";
+import { json, request } from "express";
 
 export const getProfie = (req, res) => {
   return res.render("profile", {
@@ -10,20 +10,27 @@ export const getProfie = (req, res) => {
 };
 
 export const postProfile = async (req, res) => {
-  const { name, email, username, location } = req.body;
-  const _id = req.session.user._id;
-  const updateUser = await User.findByIdAndUpdate(
-    _id,
-    {
-      name,
-      email,
-      username,
-      location,
+  const {
+    session: {
+      user: { _id },
     },
-    { new: true }
-  );
-  req.session.user = updateUser;
-  return res.render("profile");
+    body: { name, email, username, location },
+  } = req;
+  await User.findByIdAndUpdate(_id, {
+    name,
+    email,
+    username,
+    location,
+  });
+
+  req.session.user = {
+    ...req.session.user,
+    name,
+    email,
+    username,
+    location,
+  };
+  return res.redirect("/user/profile");
 };
 
 export const remove = (req, res) => {
@@ -244,12 +251,4 @@ export const finishKakaoLogin = async (req, res) => {
       return res.redirect("/login");
     }
   }
-};
-
-export const getEdit = (req, res) => {
-  return res.send("hello");
-  //return res.render("edit-profile", { pageTitle: "Edit Profile" });
-};
-export const postEdit = (req, res) => {
-  return res.render("edit-profile");
 };

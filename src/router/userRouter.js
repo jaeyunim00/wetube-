@@ -21,7 +21,6 @@ userRouter
   .route("/profile")
   .get(protectorMiddleware, getProfie)
   .post(protectorMiddleware, postProfile);
-userRouter.route("edit").get(getEdit).post(postEdit);
 userRouter.get("/github/start", publicOnlyMiddleware, startGithubLogin);
 userRouter.get("/github/finish", publicOnlyMiddleware, finishGithubLogin);
 userRouter.get("/kakao/start", publicOnlyMiddleware, startKakaoLogin);
