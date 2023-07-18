@@ -7,3 +7,7 @@ block content
     input(placeholder = "username", type = "text", required, name = "username", value=loggedInUser.username)
     input(placeholder = "location", type = "text", required, name = "location", value=loggedInUser.location)
     input(type="submit", value="update profile")
+    //깃허브 로그인일때는 비밀번호 변경 불가하게
+    if !loggedInUser.socialOnly
+      hr
+      a(href="/user/change-password") Change Password

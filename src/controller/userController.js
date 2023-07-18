@@ -2,6 +2,7 @@ import User from "../models/User";
 import bcrypt from "bcrypt";
 import { json, request } from "express";
 
+//##########PROFILE############
 export const getProfie = (req, res) => {
   return res.render("profile", {
     pageTitle: "profile",
@@ -33,11 +34,52 @@ export const postProfile = async (req, res) => {
   return res.redirect("/user/profile");
 };
 
+//######CHANGE PASSWORD#######
+export const getChangePassword = (req, res) => {
+  if (req.session.user.socialOnly === true) {
+    return res.redirect("/");
+  }
+  return res.render("user/change-password", { pageTitle: "Change Password" });
+};
+
+export const postChangePassword = async (req, res) => {
+  //send 비밀번호 잘  변경
+  const {
+    session: {
+      user: { _id, password },
+    },
+    body: { oldPassword, newPassword, newPasswordConfirmation },
+  } = req;
+  const ok = await bcrypt.compare(oldPassword, password);
+  if (!ok) {
+    return res.status(400).render("user/change-password", {
+      pageTitle: "Change Password",
+      errMsg: "비밀번호 오류",
+    });
+  }
+  if (newPassword !== newPasswordConfirmation) {
+    console.log(newPassword, newPasswordConfirmation);
+    return res.status(400).render("user/change-password", {
+      pageTitle: "Change Password",
+      errMsg: "Confirm password does not match",
+    });
+  }
+
+  const user = await User.findById(_id);
+  console.log("OLD: ", user.password);
+  user.password = newPassword;
+  console.log("NEW(UNHASH): ", user.password);
+  await user.save();
+  req.session.user.password = user.password;
+  console.log("NEW(HASHED):", user.password);
+  return res.redirect("/user/logout");
+};
+
 export const remove = (req, res) => {
   return res.send("<h1>HERE IS removeUserPAGE</h1>");
 };
 
-//login lougout
+//#######login lougout########
 export const getLogin = (req, res) => {
   return res.render("login");
 };
@@ -65,7 +107,7 @@ export const logout = (req, res) => {
   return res.redirect("/");
 };
 
-//join
+//###########join############
 export const getJoin = (req, res) => {
   return res.render("join");
 };
@@ -107,7 +149,7 @@ export const postJoin = async (req, res) => {
   }
 };
 
-//GITHUB LOGIN API
+//#######GITHUB LOGIN API#########
 export const startGithubLogin = (req, res) => {
   const baseUrl = `https://github.com/login/oauth/authorize`;
   const config = {
@@ -136,7 +178,6 @@ export const finishGithubLogin = async (req, res) => {
     },
   });
   const json = await data.json();
-  console.log(json);
   if ("access_token" in json) {
     //access api
     const { access_token } = json;
@@ -155,8 +196,6 @@ export const finishGithubLogin = async (req, res) => {
         },
       })
     ).json();
-    console.log(userData);
-    console.log(emailData);
     const emailObj = emailData.find(
       (email) => email.primary === true && email.verified === true
     );
@@ -183,72 +222,5 @@ export const finishGithubLogin = async (req, res) => {
     }
   } else {
     return res.redirect("/login");
-  }
-};
-
-//KAKAO LOGIN APT
-export const startKakaoLogin = (req, res) => {
-  const baseUrl = "https://kauth.kakao.com/oauth/authorize";
-  const config = {
-    client_id: process.env.KAKAO_REST_KEY,
-    redirect_uri: "http://localhost:4000/user/kakao/finish",
-    response_type: "code",
-  };
-
-  const params = new URLSearchParams(config).toString();
-
-  const finalUrl = `${baseUrl}?${params}`;
-
-  return res.redirect(finalUrl);
-};
-
-export const finishKakaoLogin = async (req, res) => {
-  const baseUrl = "https://kauth.kakao.com/oauth/token";
-  const config = {
-    grant_type: "authorization_code",
-    client_id: process.env.KAKAO_REST_KEY,
-    client_secret: process.env.KAKAO_SECRET_KEY,
-    redirect_uri: "http://localhost:4000/user/kakao/finish",
-    code: req.query.code,
-  };
-
-  const params = new URLSearchParams(config).toString();
-
-  const finalUrl = `${baseUrl}?${params}`;
-  console.log(finalUrl);
-
-  const tokenRequest = await (
-    await fetch(finalUrl, {
-      method: "POST",
-    })
-  ).json();
-
-  console.log(tokenRequest);
-
-  if ("access_token" in tokenRequest) {
-    const { access_token } = tokenRequest;
-    const apiUrl = "https://kapi.kakao.com/v2/user/me";
-    const userData = await (
-      await fetch(`${apiUrl}`, {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      })
-    ).json();
-
-    console.log(userData);
-    res.send(JSON.stringify(userData));
-
-    const kakaoAccount = userData.kakao_account;
-    const kakaoProfile = kakaoAccount.profile;
-
-    console.log(kakaoAccount);
-
-    if (
-      kakaoAccount.is_email_valid === false ||
-      kakaoAccount.is_email_verified === false
-    ) {
-      return res.redirect("/login");
-    }
   }
 };
