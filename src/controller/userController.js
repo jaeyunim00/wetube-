@@ -18,6 +18,7 @@ export const postProfile = async (req, res) => {
     body: { name, email, username, location },
     file,
   } = req;
+  console.log(file);
   await User.findByIdAndUpdate(_id, {
     avatarUrl: file ? file.path : avatarUrl,
     name,

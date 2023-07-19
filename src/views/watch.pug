@@ -3,6 +3,7 @@ extends partials/base.pug
 block title 
     h1=video.title
 block content
+    video(src= "/" + video.fileUrl, controls, width ="700", height = "400")
     div 
         p=video.description
         small=video.createdAt
