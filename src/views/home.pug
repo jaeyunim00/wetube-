@@ -2,8 +2,7 @@ extends partials/base.pug
 include mixins/video
 
 block title
-    h1 Here is Treding Page
-    button send
+    h1 인기 동영상
 block content
     each video in videos
         +video(video)

@@ -1,9 +1,10 @@
+import multer from "multer";
+
 //로그인 되어있는지 아닌지 확인.
 export const localMiddleware = (req, res, next) => {
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   res.locals.siteName = "WeTube";
   res.locals.loggedInUser = req.session.user || {};
-  console.log(req.session.user);
   next();
 };
 
@@ -23,3 +24,7 @@ export const publicOnlyMiddleware = (req, res, next) => {
     return res.redirect("/");
   }
 };
+
+export const uploadFiles = multer({
+  dest: "uploads/",
+});
