@@ -92,7 +92,7 @@ export const getChannel = async (req, res) => {
 
   return res.render("user/channel", {
     pageTitle: `${user.name}의 channel`,
-    user,
+    user
   });
 };
 

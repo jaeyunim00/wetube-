@@ -55,6 +55,7 @@ app.use("/", rootRouter);
 app.use("/user", userRouter);
 app.use("/videos", videosRouter);
 app.use("/uploads", express.static("uploads"));
+app.use("/static", express.static("assets"));
 
 //listen local PORT
 app.listen(PORT, handleListening);

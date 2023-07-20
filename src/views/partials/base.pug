@@ -3,6 +3,7 @@ html
     head 
         title #{pageTitle} | Wetube
         link(rel="stylesheet", href="https://unpkg.com/mvp.css@1.12/mvp.css")
+        link(rel="stylesheet", href="/static/css/styles.css")
     body
         header
             h2=pageTitle
@@ -30,3 +31,4 @@ html
         main
             block content
             include footer.pug
+        script(src="/static/js/main.js") 
