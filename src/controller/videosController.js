@@ -40,7 +40,7 @@ export const getEdit = async (req, res) => {
 export const postEdit = async (req, res) => {
   const id = req.params.id;
   const title = req.body.title;
-  const video = await Video.exists({ _id: id });
+  const video = await Video.findById(id);
   const {
     user: { _id },
   } = req.session;
@@ -48,7 +48,7 @@ export const postEdit = async (req, res) => {
     return res.render("404");
   }
   if (String(video.owner) !== String(_id)) {
-    return res.status(403).redirect("/");
+    return res.status(403).redirect("/ww");
   }
   await Video.findByIdAndUpdate(id, {
     title: title,
@@ -95,7 +95,7 @@ export const deleteVideo = async (req, res) => {
     return res.status(404).render("404", { pageTitle: "Video not found." });
   }
   if (String(video.owner) !== String(_id)) {
-    return res.status(403).redirect("/ww");
+    return res.status(403).render("404");
   }
   await Video.findByIdAndDelete(id);
   return res.redirect("/");
