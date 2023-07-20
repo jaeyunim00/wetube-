@@ -1,7 +1,7 @@
 import express from "express";
 import {
   remove,
-  see,
+  getChannel,
   logout,
   startGithubLogin,
   finishGithubLogin,
@@ -28,5 +28,7 @@ userRouter
   .post(postChangePassword);
 userRouter.get("/github/start", publicOnlyMiddleware, startGithubLogin);
 userRouter.get("/github/finish", publicOnlyMiddleware, finishGithubLogin);
+
+userRouter.get("/:id", getChannel);
 
 export default userRouter;

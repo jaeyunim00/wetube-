@@ -5,6 +5,7 @@ html
         link(rel="stylesheet", href="https://unpkg.com/mvp.css@1.12/mvp.css")
     body
         header
+            h2=pageTitle
             nav
                 ul
                     li
@@ -20,9 +21,11 @@ html
                         li 
                             a(href="/user/profile") Profile
                         li 
-                            a(href="videos/upload") UPLOAD VIDEO
+                            a(href=`/user/${loggedInUser._id}`) MY CHANNEL
+                        li 
+                            a(href="/videos/upload") UPLOAD VIDEO
                         li
-                            a(href="user/logout") LOGOUT
+                            a(href="/user/logout") LOGOUT
             block title
         main
             block content

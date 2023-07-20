@@ -10,6 +10,8 @@ const videoSchema = new mongoose.Schema({
     views: { type: Number, default: 0, required: true },
     rating: { type: Number, default: 0, required: true },
   },
+  //이 owner의 타입은 User의 ObjectId 입니다.
+  owner: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
 });
 
 /*videoSchema.pre("save", async function () {
