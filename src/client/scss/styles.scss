@@ -1,6 +1,8 @@
-@import "./variables";
+@import "./config/_reset";
+@import "./config/_variables.scss";
+@import "./components/nav.scss";
 
 body {
-  background-color: $red;
-  color: white;
+  background-color: $bg;
+  color: $main_font;
 }
