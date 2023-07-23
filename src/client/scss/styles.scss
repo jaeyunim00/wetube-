@@ -1,9 +1,16 @@
 @import "./config/_reset";
 @import "./config/_variables.scss";
 @import "./components/nav.scss";
-@import url(./components/login.scss);
+@import url("./components/login_join.scss");
+@import url("./components/video_grid.scss");
 
 body {
   background-color: $bg;
   color: $main_font;
+}
+
+.navbar {
+  position: absolute;
+  width: 100%;
+  top: 0;
 }

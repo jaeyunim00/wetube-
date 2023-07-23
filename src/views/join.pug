@@ -9,7 +9,7 @@ block content
           form(method = "post")
             input(placeholder = "성함", type = "text", required, name = "name")
             input(placeholder = "이메일", type = "email", required, name = "email")
-            input(placeholder = "닉네임", type = "text", required, name = "username")
+            input(placeholder = "아이디", type = "text", required, name = "username")
             input(placeholder = "비밀번호", type = "password", name = "password")
             input(placeholder = "비밀번호 확인", type = "password", required, name = "passwordCheck")
             input(placeholder = "거주지", type = "text", required, name = "location")
@@ -18,4 +18,4 @@ block content
           .overlay-right
             p 이미 계정이 있으신가요?
             a(href = "/login")
-              button#signUp.overlay_btn 지금 바로 로그인
+              button#signUp.overlay_btn 로그인 하러가기

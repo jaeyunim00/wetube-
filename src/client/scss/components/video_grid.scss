@@ -1,0 +1,30 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Three columns with equal width */
+  grid-gap: 20px; /* Gap between grid items */
+  /* You can adjust the width and other styles of the container here */
+  background-color: black;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+
+.grid-item {
+  /* Style for each video item */
+  background-color: #f2f2f2;
+  padding: 20px;
+  text-align: center;
+  /* You can adjust the width, height, and other styles of the grid items here */
+}
+
+.video {
+  background-color: aqua;
+  border-radius: 10px;
+  box-shadow: -5px -5px 10px #fff, 5px 5px 10px #babebc;
+}
+
+.thumnail {
+  width: 100px;
+  height: 100px;
+  background-color: beige;
+}
