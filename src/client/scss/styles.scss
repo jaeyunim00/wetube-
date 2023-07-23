@@ -1,6 +1,7 @@
 @import "./config/_reset";
 @import "./config/_variables.scss";
 @import "./components/nav.scss";
+@import url(./components/login.scss);
 
 body {
   background-color: $bg;

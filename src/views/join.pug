@@ -3,15 +3,19 @@ extends ./partials/base
 block content
     if errorMessage
         span=errorMessage
-    form(method="POST")
-        input(placeholder = "name", type = "text", required, name = "name")
-        input(placeholder = "email", type = "email", required, name = "email")
-        input(placeholder = "username", type = "text", required, name = "username")
-        input(placeholder = "Password", type = "password", name = "password")
-        input(placeholder = "Confirm Password", type = "password", required, name = "passwordCheck")
-        input(placeholder = "location", type = "text", required, name = "location")
-        input(type="submit", value="Join")
-    hr
-    div
-     span Already have  an account? 
-     a(href="/login") log in now &rarr;
+    .wrapper
+      .container
+        .sign-in-container
+          form(method = "post")
+            input(placeholder = "성함", type = "text", required, name = "name")
+            input(placeholder = "이메일", type = "email", required, name = "email")
+            input(placeholder = "닉네임", type = "text", required, name = "username")
+            input(placeholder = "비밀번호", type = "password", name = "password")
+            input(placeholder = "비밀번호 확인", type = "password", required, name = "passwordCheck")
+            input(placeholder = "거주지", type = "text", required, name = "location")
+            button.form_btn 회원가입
+        .overlay-container
+          .overlay-right
+            p 이미 계정이 있으신가요?
+            a(href = "/login")
+              button#signUp.overlay_btn 지금 바로 로그인

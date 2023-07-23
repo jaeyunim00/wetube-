@@ -3,10 +3,21 @@ extends partials/base.pug
 block content
   if errorMessage
     span=errorMessage
-  form(method="POST")
-    input(placeholder = "username", type = "text", required, name = "username")
-    input(placeholder = "password", type = "password", name = "password")
-    input(type="submit", value="login")
-    br
-    a(href="/user/github/start") Continue with Github &rarr;
-    a(href="/user/kakao/start") Continue with Kakao &rarr;
+  .wrapper
+      .container
+        .sign-in-container
+          form(method="post")
+            h1 깃허브로 로그인
+            .social-links
+              div
+                a(href='/user/github/start')
+                  i.fa.fa-github(aria-hidden='true')
+            h1 계정이 있으신가요?
+            input(placeholder = "username", type = "text", required, name = "username")
+            input(placeholder = "password", type = "password", name = "password")
+            input(type="submit", value="login")
+        .overlay-container
+          .overlay-right
+            p 계정이 없으신가요?
+            a(href = "/join")
+              button#signUp.overlay_btn 회원가입
